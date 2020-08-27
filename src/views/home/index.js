@@ -111,10 +111,6 @@ function Home() {
             setFeedback("Sua sentença lógica é inválida!");
             return;
           }
-        } else if (characterIndex + 1 === sentenceArray.length) {
-          setIsValid(false);
-          setFeedback("Sua sentença lógica é inválida!");
-          return;
         }
       } else if (sentenceArray[characterIndex] === "¬") {
         if (characterIndex + 1 === sentenceArray.length) {
