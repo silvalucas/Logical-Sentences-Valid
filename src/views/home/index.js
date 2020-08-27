@@ -57,6 +57,9 @@ function Home() {
           } else {
             handleCheckSequenceSymbols();
           }
+        } else{
+          setIsValid(false);
+          setFeedback("Sua sentença lógica é inválida!");
         }
       }
     }
