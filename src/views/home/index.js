@@ -23,6 +23,7 @@ function Home() {
 
   const handleCheckInvalidChars = () => {
     let temporary = sentence;
+    
     for (let iteration = 0; iteration < sentence.length; iteration++) {
       temporary = temporary.replace("¬", "");
       temporary = temporary.replace("∧", "");
@@ -49,15 +50,37 @@ function Home() {
         setIsValid(false);
         setFeedback("Sua sentença lógica é inválida!");
       } else {
-        if (!handleCheckInvalidChars()) {
-          setIsValid(false);
-          setFeedback("Sua sentença lógica é inválida!");
-        } else {
-          handleCheckSequenceSymbols();
+        if(handleCheckParenteses()){
+          if (!handleCheckInvalidChars()) {
+            setIsValid(false);
+            setFeedback("Sua sentença lógica é inválida!");
+          } else {
+            handleCheckSequenceSymbols();
+          }
         }
       }
     }
   };
+
+  const handleCheckParenteses = () => {
+    let sentenceArray = sentence.split('');
+    let openParentese = 0;
+    let closeParentese = 0;
+
+    for(let iteration = 0; iteration < sentenceArray.length; iteration++){
+      if(sentenceArray[iteration] === "("){
+        openParentese = openParentese + 1;
+      }
+      if(sentenceArray[iteration] === ")"){
+        closeParentese = closeParentese + 1;
+      }
+    }
+    if(openParentese !== closeParentese){
+      return false;
+    } 
+      
+    return true;
+  }
 
   const handleCheckSequenceSymbols = () => {
     let sentenceArray = sentence.replace(" ", "").split("");
